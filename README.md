@@ -10,18 +10,6 @@ This project implements an end-to-end Retrieval-Augmented Generation workflow fo
 - Grounded prompting with source-token citations to reduce hallucinations
 - Streamlit interface for interactive querying and source inspection
 
-## Project Structure
-
-```text
-app.py
-rag_assistant/
-  config.py
-  ingestion.py
-  chunking.py
-  retrieval.py
-  generation.py
-  pipeline.py
-```
 
 ## Run Locally
 
