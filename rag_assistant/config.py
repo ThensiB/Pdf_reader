@@ -10,3 +10,6 @@ class RAGConfig:
     chunk_overlap: int = 180
     retrieval_k: int = 6
     retrieval_fetch_k: int = 20
+    web_search_enabled: bool = True
+    web_search_results: int = 5
+    web_search_timeout_seconds: int = 10

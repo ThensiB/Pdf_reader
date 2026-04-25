@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
+from urllib.parse import urlparse
 
 
 @dataclass(slots=True)
@@ -53,6 +54,20 @@ class AssistantResponse:
     answer: str
     standalone_question: str
     sources: list[RetrievedChunk]
+    used_web_search: bool = False
+    web_sources: list["WebSearchResult"] = field(default_factory=list)
+
+
+@dataclass(slots=True)
+class WebSearchResult:
+    title: str
+    url: str
+    snippet: str
+
+    @property
+    def domain(self) -> str:
+        netloc = urlparse(self.url).netloc
+        return netloc.removeprefix("www.") or "web"
 
 
 @dataclass(slots=True)

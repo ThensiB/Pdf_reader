@@ -35,12 +35,18 @@ class SemanticVectorIndex:
             for document, score in matches
         ]
 
-    def retrieve_for_generation(self, query: str) -> list[RetrievedChunk]:
+    def retrieve_for_generation(
+        self,
+        query: str,
+        *,
+        k: int | None = None,
+        fetch_k: int | None = None,
+    ) -> list[RetrievedChunk]:
         vector_store = self._require_vector_store()
         documents = vector_store.max_marginal_relevance_search(
             query=query,
-            k=self.config.retrieval_k,
-            fetch_k=self.config.retrieval_fetch_k,
+            k=k or self.config.retrieval_k,
+            fetch_k=fetch_k or self.config.retrieval_fetch_k,
         )
         return [
             RetrievedChunk(content=document.page_content, metadata=document.metadata)
